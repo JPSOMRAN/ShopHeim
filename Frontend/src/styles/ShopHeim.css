@@ -1,0 +1,50 @@
+.why-shopheim {
+  width: 94%;
+  margin: 120px auto;
+}
+
+.why-shopheim h2 {
+  text-align: center;
+
+  color: white;
+
+  font-size: 3rem;
+
+  margin-bottom: 60px;
+}
+
+.why-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 25px;
+}
+
+.why-card {
+  background: white;
+
+  padding: 40px 30px;
+
+  border-radius: 20px;
+
+  text-align: center;
+
+  transition: .3s;
+}
+
+.why-card:hover {
+  transform: translateY(-8px);
+}
+
+.why-card h3 {
+  color: #111;
+
+  margin-bottom: 15px;
+}
+
+.why-card p {
+  color: #666;
+
+  line-height: 1.6;
+}

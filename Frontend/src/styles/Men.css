@@ -1,0 +1,195 @@
+.men-page{
+  width:95%;
+  margin:60px auto;
+}
+
+/* HEADING */
+
+.men-page h1{
+  text-align:center;
+  color:white;
+  font-size:4rem;
+  margin-bottom:10px;
+}
+
+.men-subtitle{
+  text-align:center;
+  color:#9ca3af;
+  font-size:1.2rem;
+  margin-bottom:40px;
+}
+
+/* FILTER */
+
+.filter-section{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  margin-bottom:45px;
+}
+
+.filter-section label{
+  color:white;
+  font-size:18px;
+  font-weight:600;
+}
+
+.filter-section select{
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  min-width:250px;
+  font-size:16px;
+  outline:none;
+  cursor:pointer;
+}
+
+/* GRID */
+
+.men-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+}
+
+/* CARD */
+
+.men-card{
+  background:white;
+  border-radius:20px;
+  overflow:hidden;
+
+  transition:.3s;
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,.15);
+}
+
+.men-card:hover{
+  transform:translateY(-10px);
+}
+
+/* IMAGE */
+
+.men-card img{
+  width:100%;
+  height:350px;
+  object-fit:cover;
+}
+
+/* INFO */
+
+.men-info{
+  padding:20px;
+}
+
+.category-tag{
+  color:#6b7280;
+  font-size:.85rem;
+  font-weight:600;
+}
+
+.men-info h3{
+  color:#111827;
+  margin:10px 0;
+  font-size:1.1rem;
+}
+
+.men-info p{
+  color:#d4af37;
+  font-weight:700;
+  font-size:1.2rem;
+}
+
+/* BUTTONS */
+
+.button-group{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+.details-btn{
+  flex:1;
+
+  padding:12px;
+
+  border:none;
+  border-radius:10px;
+
+  background:#d4af37;
+
+  color:white;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.details-btn:hover{
+  background:#b89427;
+}
+
+.buy-btn{
+  flex:1;
+
+  padding:12px;
+
+  border:none;
+  border-radius:10px;
+
+  background:#111827;
+
+  color:white;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.buy-btn:hover{
+  background:black;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px){
+
+  .men-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
+
+@media(max-width:900px){
+
+  .men-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .men-page h1{
+    font-size:3rem;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .men-grid{
+    grid-template-columns:1fr;
+  }
+
+  .filter-section{
+    flex-direction:column;
+  }
+
+  .men-page h1{
+    font-size:2.3rem;
+  }
+
+}

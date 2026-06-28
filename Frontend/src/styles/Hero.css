@@ -1,0 +1,445 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+
+  height: 75px;
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 30px;
+
+  border-bottom: 1px solid #ececec;
+}
+
+/* LEFT */
+
+.nav-logo {
+  flex: 1;
+}
+
+.logo {
+  color: #111;
+  font-size: 1.7rem;
+  font-weight: 800;
+  font-family: "Inter", sans-serif;
+}
+
+/* CENTER */
+
+.nav-center {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+}
+
+.nav-center ul {
+  display: flex;
+  align-items: center;
+
+  gap: 28px;
+
+  list-style: none;
+}
+
+/* RIGHT */
+
+.nav-right {
+  flex: 1;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-right ul {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  list-style: none;
+}
+
+/* ITEMS */
+
+.nav-center li,
+.nav-right li {
+  color: #222;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.nav-center li:hover,
+.nav-right li:hover {
+  color: #d4af37;
+}
+
+/* ACCOUNT BUTTON */
+
+.account-btn {
+  background: #d4af37;
+
+  color: white !important;
+
+  padding: 10px 18px;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+}
+
+.account-btn:hover {
+  background: #b9952c;
+}
+.logo {
+  color: #111;
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-family: "Inter", sans-serif;
+}
+
+.nav-center ul,
+.nav-right ul {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+}
+
+.nav-center li,
+.nav-right li {
+  color: #222;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-center li:hover,
+.nav-right li:hover {
+  color: #d4af37;
+}
+
+.account-btn {
+  background: #d4af37;
+  color: white !important;
+  padding: 10px 18px !important;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.account-btn:hover {
+  background: #b9952c;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  width: 96%;
+  height: 600px;
+
+  margin: 25px auto;
+
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  background: white;
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   IMAGE
+========================= */
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  animation: heroFade 0.8s ease;
+
+  z-index: 1;
+}
+
+/* =========================
+   WHITE SIDE BLEND
+========================= */
+
+.hero::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.98) 0%,
+      rgba(255,255,255,.75) 18%,
+      rgba(255,255,255,.20) 38%,
+      rgba(255,255,255,.05) 50%,
+      rgba(255,255,255,0) 65%
+    );
+
+  z-index: 2;
+}
+
+/* =========================
+   HERO CONTENT
+========================= */
+
+.hero-content {
+  position: relative;
+  z-index: 5;
+
+  width: 32%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding-left: 90px;
+}
+
+.hero-content p {
+  color: #d4af37;
+
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  letter-spacing: 4px;
+  text-transform: uppercase;
+
+  margin-bottom: 15px;
+}
+
+.hero-content h1 {
+  color: #111;
+
+  font-size: 3.2rem;
+  line-height: 1.08;
+
+  font-weight: 800;
+
+  margin-bottom: 15px;
+
+  font-family: "Inter", sans-serif;
+}
+
+.hero-content h3 {
+  color: #444;
+
+  font-size: 1.15rem;
+  font-weight: 500;
+
+  line-height: 1.6;
+
+  margin-bottom: 30px;
+}
+
+.hero-content button {
+  width: fit-content;
+
+  padding: 12px 28px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #d4af37;
+  color: white;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.hero-content button:hover {
+  background: #b9952c;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   ARROWS
+========================= */
+
+.arrow {
+  position: absolute;
+
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 60px;
+  height: 60px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: rgba(255,255,255,.95);
+
+  color: #222;
+
+  font-size: 2rem;
+
+  cursor: pointer;
+
+  z-index: 50;
+
+  transition: 0.3s;
+}
+
+.arrow:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.left-arrow {
+  left: 20px;
+}
+
+.right-arrow {
+  right: 20px;
+}
+
+/* =========================
+   DOTS
+========================= */
+
+.hero-dots {
+  position: absolute;
+
+  bottom: 20px;
+  right: 25px;
+
+  display: flex;
+  gap: 8px;
+
+  padding: 8px 12px;
+
+  background: rgba(255,255,255,.95);
+
+  border-radius: 40px;
+
+  z-index: 100;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #d0d0d0;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.active-dot {
+  width: 28px;
+
+  border-radius: 30px;
+
+  background: #444;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+  .hero-content {
+    width: 55%;
+    padding-left: 50px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.6rem;
+  }
+
+  .hero-content h3 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .nav-center,
+  .nav-right {
+    display: none;
+  }
+
+  .hero {
+    height: 500px;
+  }
+
+  .hero-content {
+    width: 85%;
+    padding-left: 30px;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content h3 {
+    font-size: 0.95rem;
+  }
+}
