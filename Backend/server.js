@@ -1,13 +1,20 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
 import connectDB from "./config/db.js";
-import wishlistRoutes from "./routes/wishlistRoutes.js";
-import orderRoutes from "./routes/orderRoutes.js";
+
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
+import searchRoutes from "./routes/searchRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
+import wishlistRoutes from "./routes/wishlistRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+
 
 dotenv.config();
 
@@ -15,9 +22,17 @@ connectDB();
 
 const app = express();
 
-// ===========================
+// ====================================
+// ES Module __dirname
+// ====================================
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
+// ====================================
 // Middlewares
-// ===========================
+// ====================================
 
 app.use(cors());
 
@@ -25,13 +40,38 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-// ===========================
+// ====================================
+// Static Product Images
+// ====================================
+
+app.use(
+  "/products",
+  express.static(
+    path.join(
+      __dirname,
+      "../Frontend/src/assets/products"
+    )
+  )
+);
+
+// ====================================
+// Uploaded Images
+// ====================================
+
+app.use(
+  "/uploads",
+  express.static(
+    path.join(__dirname, "uploads")
+  )
+);
+
+// ====================================
 // Home Route
-// ===========================
+// ====================================
 
 app.get("/", (req, res) => {
 
-  res.json({
+  res.status(200).json({
 
     success: true,
 
@@ -41,60 +81,53 @@ app.get("/", (req, res) => {
 
 });
 
-// ===========================
+// ====================================
 // API Routes
-// ===========================
+// ====================================
 
-app.use(
+app.use("/api/auth", authRoutes);
 
-  "/api/auth",
+app.use("/api/products", productRoutes);
 
-  authRoutes
+app.use("/api/search", searchRoutes);
 
-);
 
-app.use(
+app.use("/api/cart", cartRoutes);
 
-  "/api/products",
+app.use("/api/wishlist", wishlistRoutes);
 
-  productRoutes
+app.use("/api/orders", orderRoutes);
 
-);
+app.use("/api/upload", uploadRoutes);
 
-app.use(
+app.use("/api/users", userRoutes);
 
-  "/api/cart",
+// ====================================
+// Global Error Handler
+// ====================================
 
-  cartRoutes
+app.use((err, req, res, next) => {
 
-);
-app.use(
+  console.error(err);
 
-  "/api/wishlist",
+  res.status(500).json({
 
-  wishlistRoutes
+    success: false,
 
-);
+    message: err.message || "Internal Server Error",
 
-app.use(
+  });
 
-  "/api/orders",
+});
 
-  orderRoutes
-
-);
-// ===========================
-// Server
-// ===========================
+// ====================================
+// Start Server
+// ====================================
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
 
-  console.log(
-
-    `Server Running On Port ${PORT}`
-
-  );
+  console.log(`🚀 Server Running On Port ${PORT}`);
 
 });

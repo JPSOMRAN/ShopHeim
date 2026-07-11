@@ -14,26 +14,26 @@ function CategorySection() {
     {
       name: "Men",
       image: menImg,
-      route: "/men",
+      route: "/products?gender=Men",
     },
 
     {
       name: "Women",
       image: womenImg,
-      route: "/women",
+      route: "/products?gender=Women",
     },
 
     {
-  name: "Boys",
-  image: boysImg,
-  route: "/boys",
-},
+      name: "Boys",
+      image: boysImg,
+      route: "/products?gender=Boys",
+    },
 
-{
-  name: "Girls",
-  image: girlsImg,
-  route: "/girls",
-} ,
+    {
+      name: "Girls",
+      image: girlsImg,
+      route: "/products?gender=Girls",
+    },
   ];
 
   return (
@@ -46,9 +46,9 @@ function CategorySection() {
         {categories.map((item, index) => (
 
           <div
-            className="category-card"
             key={index}
-            onClick={() => item.route && navigate(item.route)}
+            className="category-card"
+            onClick={() => navigate(item.route)}
           >
 
             <img
@@ -57,7 +57,9 @@ function CategorySection() {
             />
 
             <div className="category-overlay">
+
               <h3>{item.name}</h3>
+
             </div>
 
           </div>

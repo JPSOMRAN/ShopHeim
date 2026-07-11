@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import useCart from "../hooks/useCart";
 import useWishlist from "../hooks/useWishlist";
-
-import { toast } from "react-toastify";
 
 import "../styles/ProductCard.css";
 
@@ -33,11 +32,15 @@ function ProductCard({
 
   } = useWishlist();
 
+  // =============================
+  // Add To Cart
+  // =============================
+
   const handleAddToCart = () => {
 
     addToCart({
 
-      id,
+      _id: id,
 
       image,
 
@@ -51,15 +54,19 @@ function ProductCard({
 
     });
 
-    toast.success("Added To Cart 🛒");
+    toast.success("🛒 Added To Cart");
 
   };
+
+  // =============================
+  // Wishlist
+  // =============================
 
   const handleWishlist = () => {
 
     const exists = wishlistItems.find(
 
-      (item) => item.id === id
+      (item) => item._id === id
 
     );
 
@@ -73,7 +80,7 @@ function ProductCard({
 
     addToWishlist({
 
-      id,
+      _id: id,
 
       image,
 
@@ -87,7 +94,7 @@ function ProductCard({
 
     });
 
-    toast.success("Added To Wishlist ❤️");
+    toast.success("❤️ Added To Wishlist");
 
   };
 
@@ -96,19 +103,13 @@ function ProductCard({
     <div className="product-card">
 
       <Link
-
         to={`/product/${id}`}
-
         className="product-link"
-
       >
 
         <img
-
           src={image}
-
           alt={name}
-
         />
 
       </Link>
@@ -129,7 +130,7 @@ function ProductCard({
 
         <p className="price">
 
-          {price}
+          ₹{price}
 
         </p>
 

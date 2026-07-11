@@ -1,195 +1,302 @@
+/* =========================================================
+   MEN PAGE
+========================================================= */
+
 .men-page{
-  width:95%;
-  margin:60px auto;
+    width:min(95%,1500px);
+    margin:40px auto 80px;
+    padding:20px;
+    background:#f7f3eb;
+    min-height:100vh;
 }
 
-/* HEADING */
+/* =========================================================
+   HEADER
+========================================================= */
 
 .men-page h1{
-  text-align:center;
-  color:white;
-  font-size:4rem;
-  margin-bottom:10px;
+    text-align:center;
+    color:#111;
+    font-size:clamp(2.2rem,5vw,4rem);
+    font-weight:800;
+    margin-bottom:10px;
 }
 
 .men-subtitle{
-  text-align:center;
-  color:#9ca3af;
-  font-size:1.2rem;
-  margin-bottom:40px;
+    text-align:center;
+    color:#666;
+    font-size:1.1rem;
+    margin-bottom:40px;
 }
 
-/* FILTER */
+/* =========================================================
+   FILTER
+========================================================= */
 
 .filter-section{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:15px;
-  margin-bottom:45px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    margin-bottom:45px;
+    flex-wrap:wrap;
 }
 
 .filter-section label{
-  color:white;
-  font-size:18px;
-  font-weight:600;
+    color:#222;
+    font-size:17px;
+    font-weight:700;
 }
 
 .filter-section select{
-  padding:12px 18px;
-  border:none;
-  border-radius:10px;
-  min-width:250px;
-  font-size:16px;
-  outline:none;
-  cursor:pointer;
+    width:260px;
+    padding:14px 18px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    background:#fff;
+    color:#222;
+    font-size:15px;
+    outline:none;
+    cursor:pointer;
+    transition:.3s;
 }
 
-/* GRID */
+.filter-section select:hover,
+.filter-section select:focus{
+    border-color:#111;
+}
+
+/* =========================================================
+   GRID
+========================================================= */
 
 .men-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+    gap:30px;
 }
 
-/* CARD */
+/* =========================================================
+   CARD
+========================================================= */
 
 .men-card{
-  background:white;
-  border-radius:20px;
-  overflow:hidden;
-
-  transition:.3s;
-
-  box-shadow:
-  0 10px 30px rgba(0,0,0,.15);
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+    transition:.35s;
 }
 
 .men-card:hover{
-  transform:translateY(-10px);
+    transform:translateY(-8px);
+    box-shadow:0 20px 45px rgba(0,0,0,.15);
 }
 
-/* IMAGE */
+/* =========================================================
+   IMAGE
+========================================================= */
 
 .men-card img{
-  width:100%;
-  height:350px;
-  object-fit:cover;
+    width:100%;
+    aspect-ratio:4/5;
+    object-fit:cover;
+    display:block;
+    transition:.4s;
+    cursor:pointer;
 }
 
-/* INFO */
+.men-card:hover img{
+    transform:scale(1.04);
+}
+
+/* =========================================================
+   INFO
+========================================================= */
 
 .men-info{
-  padding:20px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    padding:22px;
 }
 
 .category-tag{
-  color:#6b7280;
-  font-size:.85rem;
-  font-weight:600;
+    color:#888;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
 }
 
 .men-info h3{
-  color:#111827;
-  margin:10px 0;
-  font-size:1.1rem;
+    margin:10px 0;
+    color:#111;
+    font-size:1.4rem;
+    font-weight:700;
+    line-height:1.35;
+    min-height:70px;
 }
 
 .men-info p{
-  color:#d4af37;
-  font-weight:700;
-  font-size:1.2rem;
+    margin:0;
+    color:#111;
+    font-size:2rem;
+    font-weight:800;
 }
 
-/* BUTTONS */
+/* =========================================================
+   BUTTON GROUP
+========================================================= */
 
-.button-group{
-  display:flex;
-  gap:10px;
-  margin-top:20px;
+.men-button-group{
+    display:flex;
+    gap:12px;
+    margin-top:auto;
+    padding-top:22px;
 }
 
-.details-btn{
-  flex:1;
+/* =========================================================
+   DETAILS BUTTON
+========================================================= */
 
-  padding:12px;
-
-  border:none;
-  border-radius:10px;
-
-  background:#d4af37;
-
-  color:white;
-
-  font-weight:700;
-
-  cursor:pointer;
-
-  transition:.3s;
+.men-details-btn{
+    flex:1;
+    height:50px;
+    border:2px solid #111;
+    border-radius:12px;
+    background:#fff;
+    color:#111;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
 }
 
-.details-btn:hover{
-  background:#b89427;
+.men-details-btn:hover{
+    background:#111;
+    color:#fff;
 }
 
-.buy-btn{
-  flex:1;
+/* =========================================================
+   CART BUTTON
+========================================================= */
 
-  padding:12px;
-
-  border:none;
-  border-radius:10px;
-
-  background:#111827;
-
-  color:white;
-
-  font-weight:700;
-
-  cursor:pointer;
-
-  transition:.3s;
+.men-cart-btn{
+    flex:1;
+    height:50px;
+    border:none;
+    border-radius:12px;
+    background:#111;
+    color:#fff;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
 }
 
-.buy-btn:hover{
-  background:black;
+.men-cart-btn:hover{
+    background:#333;
 }
 
-/* RESPONSIVE */
+/* =========================================================
+   WISHLIST BUTTON
+========================================================= */
+
+.men-wishlist-btn{
+    width:50px;
+    height:50px;
+    flex-shrink:0;
+    border:none;
+    border-radius:12px;
+    background:#f5f5f5;
+    color:#ff3b5c;
+    font-size:20px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.men-wishlist-btn:hover{
+    background:#ff3b5c;
+    color:#fff;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media(max-width:1200px){
 
-  .men-grid{
-    grid-template-columns:repeat(3,1fr);
-  }
+    .men-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
 
 }
 
-@media(max-width:900px){
+@media(max-width:992px){
 
-  .men-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .men-page h1{
-    font-size:3rem;
-  }
+    .men-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 
 }
 
-@media(max-width:600px){
+@media(max-width:768px){
 
-  .men-grid{
-    grid-template-columns:1fr;
-  }
+    .men-page{
+        padding:16px;
+    }
 
-  .filter-section{
-    flex-direction:column;
-  }
+    .men-page h1{
+        font-size:2.3rem;
+    }
 
-  .men-page h1{
-    font-size:2.3rem;
-  }
+    .men-grid{
+        grid-template-columns:1fr;
+    }
+
+    .men-button-group{
+        flex-direction:column;
+    }
+
+    .men-details-btn,
+    .men-cart-btn{
+        width:100%;
+    }
+
+    .men-wishlist-btn{
+        width:100%;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .men-page{
+        padding:12px;
+    }
+
+    .men-page h1{
+        font-size:1.8rem;
+    }
+
+    .men-subtitle{
+        font-size:.95rem;
+    }
+
+    .men-info{
+        padding:18px;
+    }
+
+    .men-info h3{
+        font-size:1.15rem;
+        min-height:auto;
+    }
+
+    .men-info p{
+        font-size:1.6rem;
+    }
 
 }

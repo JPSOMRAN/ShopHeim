@@ -14,14 +14,52 @@ const seedProducts = async () => {
 
   try {
 
+    // Delete Existing Products
+
     await Product.deleteMany();
 
-    await Product.insertMany(products);
+    // Format Products
+
+    const formattedProducts = products.map((item) => ({
+
+      name: item.name,
+
+      brand: item.brand || "ShopHeim",
+
+      category: item.category,
+
+      gender: item.gender || "Men",
+
+      // Main Image
+
+      image: item.image,
+
+      // Gallery Images
+
+      images: item.images || [item.image],
+
+      description:
+        item.description ||
+        "Premium Fashion Product",
+
+      price: Number(
+        String(item.price).replace(/[^\d]/g, "")
+      ),
+
+      rating: Number(item.rating) || 4.5,
+
+      stock: item.stock || 100,
+
+    }));
+
+    // Insert Products
+
+    await Product.insertMany(
+      formattedProducts
+    );
 
     console.log(
-
-      "Products Seeded Successfully"
-
+      `✅ ${formattedProducts.length} Products Seeded Successfully`
     );
 
     process.exit();

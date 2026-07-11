@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-import Navbar from "../components/Navbar";
 
 import "../styles/Auth.css";
 
@@ -17,20 +17,15 @@ function Register() {
 
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
 
     e.preventDefault();
 
     if (
-
       !name ||
-
       !email ||
-
       !password ||
-
       !confirmPassword
-
     ) {
 
       alert("Please fill all fields");
@@ -47,9 +42,41 @@ function Register() {
 
     }
 
-    alert("Backend Registration Coming Next");
+    try {
 
-    navigate("/login");
+      const { data } = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        {
+          name,
+          email,
+          password,
+        }
+      );
+
+      localStorage.setItem(
+        "token",
+        data.token
+      );
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(data)
+      );
+
+      alert("Registration Successful");
+
+      navigate("/account");
+
+    }
+
+    catch (error) {
+
+      alert(
+        error.response?.data?.message ||
+        "Registration Failed"
+      );
+
+    }
 
   };
 
@@ -57,92 +84,54 @@ function Register() {
 
     <>
 
-      <Navbar />
 
       <div className="auth-page">
 
         <form
-
           className="auth-box"
-
           onSubmit={handleRegister}
-
         >
 
-          <h1>
-
-            Register
-
-          </h1>
+          <h1>Register</h1>
 
           <input
-
             type="text"
-
             placeholder="Full Name"
-
             value={name}
-
-            onChange={(e)=>
-
+            onChange={(e) =>
               setName(e.target.value)
-
             }
-
           />
 
           <input
-
             type="email"
-
             placeholder="Email"
-
             value={email}
-
-            onChange={(e)=>
-
+            onChange={(e) =>
               setEmail(e.target.value)
-
             }
-
           />
 
           <input
-
             type="password"
-
             placeholder="Password"
-
             value={password}
-
-            onChange={(e)=>
-
+            onChange={(e) =>
               setPassword(e.target.value)
-
             }
-
           />
 
           <input
-
             type="password"
-
             placeholder="Confirm Password"
-
             value={confirmPassword}
-
-            onChange={(e)=>
-
+            onChange={(e) =>
               setConfirmPassword(e.target.value)
-
             }
-
           />
 
-          <button>
-
+          <button type="submit">
             Create Account
-
           </button>
 
           <p>
@@ -150,9 +139,7 @@ function Register() {
             Already have an account?
 
             <Link to="/login">
-
               Login
-
             </Link>
 
           </p>

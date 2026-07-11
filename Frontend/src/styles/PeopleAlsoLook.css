@@ -1,0 +1,313 @@
+/* ==================================================
+   PEOPLE ALSO LOOK FOR
+================================================== */
+
+.people-look{
+    width:100%;
+    max-width:1850px;
+    margin:50px auto;
+    padding:0 20px;
+}
+.people-look h2{
+    color:#111;
+    font-size:2rem;
+    font-weight:800;
+    margin-bottom:25px;
+}
+
+/* ==================================================
+   GRID
+================================================== */
+
+.people-grid{
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:18px;
+}
+
+/* ==================================================
+   CARD
+================================================== */
+
+.people-card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 24px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.people-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 40px rgba(0,0,0,.15);
+}
+
+/* ==================================================
+   IMAGE
+================================================== */
+
+.people-card img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    cursor:pointer;
+    transition:.35s;
+}
+
+.people-card:hover img{
+    transform:scale(1.05);
+}
+
+/* ==================================================
+   WISHLIST
+================================================== */
+
+.people-wishlist{
+
+    position:absolute;
+
+    top:14px;
+
+    right:14px;
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    color:#ff4d6d;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+    transition:.3s;
+
+}
+
+.people-wishlist:hover{
+
+    background:#ff4d6d;
+
+    color:#fff;
+
+}
+
+/* ==================================================
+   CONTENT
+================================================== */
+
+.people-content{
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    padding:16px;
+}
+
+/* ==================================================
+   CATEGORY
+================================================== */
+
+.people-category{
+    color:#888;
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:8px;
+}
+
+/* ==================================================
+   TITLE
+================================================== */
+
+.people-content h3{
+    margin:0;
+    color:#111;
+    font-size:1.05rem;
+    font-weight:700;
+    line-height:1.35;
+    min-height:50px;
+}
+
+/* ==================================================
+   BRAND
+================================================== */
+
+.people-brand{
+    margin-top:8px;
+    color:#666;
+    font-size:14px;
+}
+
+/* ==================================================
+   RATING
+================================================== */
+
+.people-rating{
+    margin-top:10px;
+    color:#0f9d58;
+    font-size:14px;
+    font-weight:700;
+}
+
+/* ==================================================
+   PRICE
+================================================== */
+
+.people-price{
+    margin:12px 0 18px;
+    color:#111;
+    font-size:1.6rem;
+    font-weight:800;
+}
+
+/* ==================================================
+   BUTTONS
+================================================== */
+
+.people-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-top:auto;
+}
+
+/* ==================================================
+   BUTTONS
+================================================== */
+
+.people-details-btn,
+.people-cart-btn{
+
+    height:42px;
+
+    border-radius:10px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.people-details-btn{
+
+    border:2px solid #111;
+
+    background:#fff;
+
+    color:#111;
+
+}
+
+.people-details-btn:hover{
+
+    background:#111;
+
+    color:#fff;
+
+}
+
+.people-cart-btn{
+
+    border:none;
+
+    background:#111;
+
+    color:#fff;
+
+}
+
+.people-cart-btn:hover{
+
+    background:#333;
+
+}
+
+/* ==================================================
+   EMPTY
+================================================== */
+
+.no-related{
+
+    width:100%;
+
+    padding:80px;
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:1.2rem;
+
+}
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media(max-width:1600px){
+
+.people-grid{
+
+grid-template-columns:repeat(4,1fr);
+
+}
+
+}
+
+@media(max-width:1200px){
+
+.people-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+}
+
+@media(max-width:900px){
+
+.people-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:600px){
+
+.people-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.people-buttons{
+
+grid-template-columns:1fr;
+
+}
+
+}

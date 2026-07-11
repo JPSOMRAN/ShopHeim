@@ -1,8 +1,9 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axios from "axios";
 
-import { menProducts } from "../data/menProducts";
-import { womenProducts } from "../data/womenProducts";
+import { FaHeart } from "react-icons/fa";
 
 import useCart from "../hooks/useCart";
 import useWishlist from "../hooks/useWishlist";
@@ -16,71 +17,77 @@ function RelatedProducts({ currentProduct }) {
   const { addToCart } = useCart();
 
   const {
-
     wishlistItems,
-
     addToWishlist,
-
   } = useWishlist();
 
-  const allProducts = [
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
-    ...menProducts,
+  useEffect(() => {
 
-    ...womenProducts,
+    if (!currentProduct) return;
 
-  ];
+    async function fetchRelatedProducts() {
 
-  const currentGender =
+      try {
 
-    currentProduct.id <= 83
-
-      ? "men"
-
-      : "women";
-
-  const relatedProducts =
-
-    allProducts
-
-      .filter((item) => {
-
-        const itemGender =
-
-          item.id <= 83
-
-            ? "men"
-
-            : "women";
-
-        return (
-
-          item.category === currentProduct.category &&
-
-          itemGender === currentGender &&
-
-          item.id !== currentProduct.id
-
+        const { data } = await axios.get(
+          `http://localhost:5000/api/products?gender=${currentProduct.gender}`
         );
 
-      })
+  const filtered = data
+.filter(product => {
 
-      .slice(0, 4);
+    if(product._id === currentProduct._id)
+        return false;
 
-  const handleCart = (item) => {
+    return (
 
-    addToCart(item);
+        product.gender === currentProduct.gender ||
+
+        product.brand === currentProduct.brand ||
+
+        product.category === currentProduct.category
+
+    );
+
+})
+.slice(0,12);
+
+        setRelatedProducts(filtered);
+
+      } catch (error) {
+
+        console.log(error);
+
+      }
+
+    }
+
+    fetchRelatedProducts();
+
+  }, [currentProduct]);
+
+  // ==========================
+  // Cart
+  // ==========================
+
+  const handleCart = (product) => {
+
+    addToCart(product);
 
     toast.success("Added To Cart 🛒");
 
   };
 
-  const handleWishlist = (item) => {
+  // ==========================
+  // Wishlist
+  // ==========================
+
+  const handleWishlist = (product) => {
 
     const exists = wishlistItems.find(
-
-      (product) => product.id === item.id
-
+      item => item._id === product._id
     );
 
     if (exists) {
@@ -91,7 +98,7 @@ function RelatedProducts({ currentProduct }) {
 
     }
 
-    addToWishlist(item);
+    addToWishlist(product);
 
     toast.success("Added To Wishlist ❤️");
 
@@ -101,95 +108,99 @@ function RelatedProducts({ currentProduct }) {
 
     <section className="related-products">
 
-      <h2>
-
-        You May Also Like
-
-      </h2>
+      <h2>You May Also Like</h2>
 
       <div className="related-grid">
 
         {
+          relatedProducts.length === 0
+          ?
 
-          relatedProducts.map((item) => (
+          <div className="no-related">
+
+            No Related Products Found
+
+          </div>
+
+          :
+
+          relatedProducts.map((product)=>(
 
             <div
-
-              key={item.id}
-
+              key={product._id}
               className="related-card"
-
             >
 
+              <button
+                className="related-wishlist"
+                onClick={()=>handleWishlist(product)}
+              >
+                <FaHeart/>
+              </button>
+
               <img
-
-                src={item.image}
-
-                alt={item.name}
-
+                src={
+                  product.image.startsWith("http")
+                  ? product.image
+                  : `http://localhost:5000${product.image}`
+                }
+                alt={product.name}
+                onClick={()=>
+                  navigate(`/product/${product._id}`)
+                }
               />
 
-              <h3>
+              <div className="related-content">
 
-                {item.name}
+                <span className="related-category">
 
-              </h3>
+                  {product.category}
 
-              <p>
+                </span>
 
-                {item.price}
+                <h3>
 
-              </p>
+                  {product.name}
 
-              <div
-                style={{
-                  display: "flex",
-                  gap: "10px",
-                  marginTop: "15px",
-                }}
-              >
+                </h3>
 
-                <button
+                <p className="related-brand">
 
-                  onClick={() =>
+                  {product.brand}
 
-                    navigate(`/product/${item.id}`)
+                </p>
 
-                  }
+                <div className="related-rating">
 
-                >
+                  ⭐ {product.rating || 4.5}
 
-                  Details
+                </div>
 
-                </button>
+                <div className="related-price">
 
-                <button
+                  ₹{product.price}
 
-                  onClick={() =>
+                </div>
 
-                    handleCart(item)
+                <div className="related-buttons">
 
-                  }
+                  <button
+                    className="related-details-btn"
+                    onClick={()=>
+                      navigate(`/product/${product._id}`)
+                    }
+                  >
+                    View Details
+                  </button>
 
-                >
+                  <button
+                    className="related-cart-btn"
+                    onClick={()=>handleCart(product)}
+                  >
+                    Add To Cart
+                  </button>
 
-                  Cart
-
-                </button>
-
-                <button
-
-                  onClick={() =>
-
-                    handleWishlist(item)
-
-                  }
-
-                >
-
-                  ❤️
-
-                </button>
+                </div>
 
               </div>
 

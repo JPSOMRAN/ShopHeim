@@ -1,11 +1,11 @@
-import Navbar from "../components/Navbar";
+
 
 import "../styles/Help.css";
 
 function Help() {
   return (
     <>
-      <Navbar />
+     
 
       <section className="help-page">
 

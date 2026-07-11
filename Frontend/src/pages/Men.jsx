@@ -1,241 +1,339 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import API from "../services/api";
 
-import Navbar from "../components/Navbar";
+
 
 import "../styles/Men.css";
-
-import { menProducts } from "../data/menProducts";
 
 import useCart from "../hooks/useCart";
 import useWishlist from "../hooks/useWishlist";
 
 function Men() {
 
-  const navigate = useNavigate();
+   const navigate = useNavigate();
 
-  const { addToCart } = useCart();
+   const { addToCart } = useCart();
 
-  const {
+   const {
+      wishlistItems,
+      addToWishlist,
+   } = useWishlist();
 
-    wishlistItems,
+   const [menProducts, setMenProducts] = useState([]);
 
-    addToWishlist,
+   const [loading, setLoading] = useState(true);
 
-  } = useWishlist();
+   const [filter, setFilter] = useState("All");
 
-  const [filter, setFilter] = useState("All");
+   useEffect(() => {
 
-  const filteredProducts =
+      async function fetchProducts() {
 
-    filter === "All"
+         try {
 
-      ? menProducts
+            const { data } = await API.get(
+               "/products?gender=Men"
+            );
 
-      : menProducts.filter(
+            setMenProducts(data);
 
-          (item) => item.category === filter
+         }
 
-        );
+         catch (error) {
 
-  const handleCart = (item) => {
+            console.log(error);
 
-    addToCart(item);
+            toast.error(
+               "Failed To Load Products"
+            );
 
-    toast.success("Added To Cart 🛒");
+         }
 
-  };
+         finally {
 
-  const handleWishlist = (item) => {
+            setLoading(false);
 
-    const exists = wishlistItems.find(
+         }
 
-      (product) => product.id === item.id
+      }
 
-    );
+      fetchProducts();
 
-    if (exists) {
+   }, []);
 
-      toast.info("Already In Wishlist ❤️");
+   const filteredProducts =
 
-      return;
+      filter === "All"
 
-    }
+         ? menProducts
 
-    addToWishlist(item);
+         : menProducts.filter(
 
-    toast.success("Added To Wishlist ❤️");
+              (item) =>
 
-  };
+                 item.category === filter
 
-  return (
+           );
 
-    <>
+   const handleCart = (item) => {
 
-      <Navbar />
+      addToCart(item);
 
-      <section className="men-page">
+      toast.success(
+         "Added To Cart 🛒"
+      );
 
-        <h1>
+   };
 
-          MEN'S COLLECTION
+   const handleWishlist = (item) => {
 
-        </h1>
+      const exists = wishlistItems.find(
 
-        <p className="men-subtitle">
+         (product) =>
 
-          Premium Fashion Collection For Men
+            product._id === item._id
 
-        </p>
+      );
 
-        <div className="filter-section">
+      if (exists) {
 
-          <label>
+         toast.info(
+            "Already In Wishlist ❤️"
+         );
 
-            Category
+         return;
 
-          </label>
+      }
 
-          <select
+      addToWishlist(item);
 
-            value={filter}
+      toast.success(
+         "Added To Wishlist ❤️"
+      );
 
-            onChange={(e)=>
+   };
 
-              setFilter(e.target.value)
+   if (loading) {
 
-            }
+      return (
+         <>
+          
+            <h2
+               style={{
+                  textAlign: "center",
+                  marginTop: "120px",
+               }}
+            >
+               Loading...
+            </h2>
+         </>
+      );
 
-          >
+   }
 
-            <option value="All">All Products</option>
-            <option value="Shirts">Shirts</option>
-            <option value="Blazers">Blazers</option>
-            <option value="Jeans">Jeans</option>
-            <option value="Watches">Watches</option>
-            <option value="T-Shirts">T-Shirts</option>
-            <option value="Sneakers">Sneakers</option>
-            <option value="Sports Shoes">Sports Shoes</option>
-            <option value="Formal Shoes">Formal Shoes</option>
-            <option value="Boots">High Ankle Boots</option>
-            <option value="Cargo Pants">Cargo Pants</option>
-            <option value="Denim Jackets">Denim Jackets</option>
-            <option value="Sandals">Sandals</option>
+   return (
 
-          </select>
+      <>
 
-        </div>
+         
 
-        <div className="men-grid">
+         <section className="men-page">
 
-          {
+            <h1>
+               MEN'S COLLECTION
+            </h1>
 
-            filteredProducts.map((item)=>(
+            <p className="men-subtitle">
+               Premium Fashion Collection For Men
+            </p>
 
-              <div
+            <div className="filter-section">
 
-                className="men-card"
+               <label>
+                  Category
+               </label>
 
-                key={item.id}
+               <select
+                  value={filter}
+                  onChange={(e) =>
+                     setFilter(
+                        e.target.value
+                     )
+                  }
+               >
 
-              >
+                  <option value="All">
+                     All Products
+                  </option>
 
-                <img
+                  <option value="Shirts">
+                     Shirts
+                  </option>
 
-                  src={item.image}
+                  <option value="Blazers">
+                     Blazers
+                  </option>
 
-                  alt={item.name}
+                  <option value="Jeans">
+                     Jeans
+                  </option>
 
-                />
+                  <option value="T-Shirts">
+                     T-Shirts
+                  </option>
 
-                <div className="men-info">
+                  <option value="Cargo Pants">
+                     Cargo Pants
+                  </option>
 
-                  <span className="category-tag">
+                  <option value="Sneakers">
+                     Sneakers
+                  </option>
 
-                    {item.category}
+                  <option value="Sports Shoes">
+                     Sports Shoes
+                  </option>
 
-                  </span>
+                  <option value="Formal Shoes">
+                     Formal Shoes
+                  </option>
 
-                  <h3>
+                  <option value="Boots">
+                     Boots
+                  </option>
 
-                    {item.name}
+                  <option value="Sandals">
+                     Sandals
+                  </option>
 
-                  </h3>
+                  <option value="Denim Jackets">
+                     Denim Jackets
+                  </option>
 
-                  <p>
+                  <option value="Watches">
+                     Watches
+                  </option>
 
-                    {item.price}
+               </select>
 
-                  </p>
+            </div>
 
-                  <div className="button-group">
+            <div className="men-grid">
 
-                    <button
+               {
 
-                      className="details-btn"
+                  filteredProducts.map((item) => (
 
-                      onClick={()=>
+                     <div
+                        key={item._id}
+                        className="men-card"
+                     >
 
-                        navigate(`/product/${item.id}`)
+                        <img
 
-                      }
+                           src={
+                              item.image.startsWith("http")
 
-                    >
+                                 ? item.image
 
-                      View Details
+                                 : `http://localhost:5000${item.image}`
+                           }
 
-                    </button>
+                           alt={item.name}
 
-                    <button
+                           onClick={() =>
+                              navigate(
+                                 `/product/${item._id}`
+                              )
+                           }
 
-                      className="buy-btn"
+                        />
 
-                      onClick={()=>
+                        <div className="men-info">
 
-                        handleCart(item)
+                           <span className="category-tag">
 
-                      }
+                              {item.category}
 
-                    >
+                           </span>
 
-                      Add To Cart
+                           <h3>
 
-                    </button>
+                              {item.name}
 
-                    <button
+                           </h3>
 
-                      className="details-btn"
+                           <p>
 
-                      onClick={()=>
+                              ₹{item.price}
 
-                        handleWishlist(item)
+                           </p>
 
-                      }
+                           <div className="men-button-group">
 
-                    >
+                              <button
 
-                      ❤️
+                                 className="men-details-btn"
 
-                    </button>
+                                 onClick={() =>
+                                    navigate(
+                                       `/product/${item._id}`
+                                    )
+                                 }
 
-                  </div>
+                              >
 
-                </div>
+                                 View Details
 
-              </div>
+                              </button>
 
-            ))
+                              <button
 
-          }
+                                 className="men-cart-btn"
 
-        </div>
+                                 onClick={() =>
+                                    handleCart(item)
+                                 }
 
-      </section>
+                              >
 
-    </>
+                                 Add To Cart
 
-  );
+                              </button>
+
+                              <button
+
+                                 className="men-wishlist-btn"
+
+                                 onClick={() =>
+                                    handleWishlist(item)
+                                 }
+
+                              >
+
+                                 ❤️
+
+                              </button>
+
+                           </div>
+
+                        </div>
+
+                     </div>
+
+                  ))
+
+               }
+
+            </div>
+
+         </section>
+
+      </>
+
+   );
 
 }
 

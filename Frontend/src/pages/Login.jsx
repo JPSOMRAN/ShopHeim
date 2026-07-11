@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-import Navbar from "../components/Navbar";
+import axios from "axios";
 
 import "../styles/Auth.css";
 
@@ -10,104 +9,86 @@ function Login() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
-
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
 
     e.preventDefault();
 
     if (!email || !password) {
-
       alert("Please fill all fields");
-
       return;
-
     }
 
-    alert("Backend Login Coming Next");
+    try {
 
-    navigate("/account");
+      const { data } = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data));
+
+      alert("Login Successful");
+
+      navigate("/account");
+
+    } catch (error) {
+
+      alert(
+        error.response?.data?.message ||
+        "Login Failed"
+      );
+
+    }
 
   };
 
   return (
 
-    <>
+    <div className="auth-page">
 
-      <Navbar />
+      <form
+        className="auth-box"
+        onSubmit={handleLogin}
+      >
 
-      <div className="auth-page">
+        <h1>Customer Login</h1>
 
-        <form
+        <input
+          type="email"
+          placeholder="Enter Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-          className="auth-box"
+        <input
+          type="password"
+          placeholder="Enter Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-          onSubmit={handleLogin}
+        <button type="submit">
+          LOGIN
+        </button>
 
-        >
+        <p>
+          Don't have an account?{" "}
+          <Link to="/register">
+            Register
+          </Link>
+        </p>
 
-          <h1>
+      </form>
 
-            Login
-
-          </h1>
-
-          <input
-
-            type="email"
-
-            placeholder="Email"
-
-            value={email}
-
-            onChange={(e)=>
-
-              setEmail(e.target.value)
-
-            }
-
-          />
-
-          <input
-
-            type="password"
-
-            placeholder="Password"
-
-            value={password}
-
-            onChange={(e)=>
-
-              setPassword(e.target.value)
-
-            }
-
-          />
-
-          <button>
-
-            Login
-
-          </button>
-
-          <p>
-
-            Don't have an account?
-
-            <Link to="/register">
-
-              Register
-
-            </Link>
-
-          </p>
-
-        </form>
-
-      </div>
-
-    </>
+    </div>
 
   );
 

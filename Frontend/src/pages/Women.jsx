@@ -1,249 +1,298 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import API from "../services/api";
 
-import Navbar from "../components/Navbar";
+
 
 import "../styles/Women.css";
-
-import { womenProducts } from "../data/womenProducts";
 
 import useCart from "../hooks/useCart";
 import useWishlist from "../hooks/useWishlist";
 
 function Women() {
 
-  const navigate = useNavigate();
+   const navigate = useNavigate();
 
-  const { addToCart } = useCart();
+   const { addToCart } = useCart();
 
-  const {
+   const {
+      wishlistItems,
+      addToWishlist,
+   } = useWishlist();
 
-    wishlistItems,
+   const [womenProducts, setWomenProducts] = useState([]);
 
-    addToWishlist,
+   const [loading, setLoading] = useState(true);
 
-  } = useWishlist();
+   const [filter, setFilter] = useState("All");
 
-  const [filter, setFilter] = useState("All");
+   useEffect(() => {
 
-  const filteredProducts =
+      async function fetchProducts() {
 
-    filter === "All"
+         try {
 
-      ? womenProducts
+            const { data } = await API.get(
+               "/products?gender=Women"
+            );
 
-      : womenProducts.filter(
+            setWomenProducts(data);
 
-          (item) => item.category === filter
+         }
 
-        );
+         catch (error) {
 
-  const handleCart = (item) => {
+            console.log(error);
 
-    addToCart(item);
+            toast.error(
+               "Failed To Load Products"
+            );
 
-    toast.success("Added To Cart 🛒");
+         }
 
-  };
+         finally {
 
-  const handleWishlist = (item) => {
+            setLoading(false);
 
-    const exists = wishlistItems.find(
+         }
 
-      (product) => product.id === item.id
+      }
 
-    );
+      fetchProducts();
 
-    if (exists) {
+   }, []);
 
-      toast.info("Already In Wishlist ❤️");
+   const filteredProducts =
 
-      return;
+      filter === "All"
 
-    }
+         ? womenProducts
 
-    addToWishlist(item);
+         : womenProducts.filter(
 
-    toast.success("Added To Wishlist ❤️");
+              (item) =>
 
-  };
+                 item.category === filter
 
-  return (
+           );
 
-    <>
+   const handleCart = (item) => {
 
-      <Navbar />
+      addToCart(item);
 
-      <section className="women-page">
+      toast.success(
+         "Added To Cart 🛒"
+      );
 
-        <h1>
+   };
 
-          WOMEN'S COLLECTION
+   const handleWishlist = (item) => {
 
-        </h1>
+      const exists = wishlistItems.find(
 
-        <p className="women-subtitle">
+         (product) =>
 
-          Premium Fashion Collection For Women
+            product._id === item._id
 
-        </p>
+      );
 
-        <div className="filter-bar">
+      if (exists) {
 
-          <button onClick={() => setFilter("All")}>
+         toast.info(
+            "Already In Wishlist ❤️"
+         );
 
-            All Products
+         return;
 
-          </button>
+      }
 
-          <button onClick={() => setFilter("Blazers")}>
+      addToWishlist(item);
 
-            Blazers
+      toast.success(
+         "Added To Wishlist ❤️"
+      );
 
-          </button>
+   };
 
-          <button onClick={() => setFilter("Tops")}>
+   if (loading) {
 
-            Tops
+      return (
+         <>
+           
+            <h2
+               style={{
+                  textAlign: "center",
+                  marginTop: "120px",
+               }}
+            >
+               Loading...
+            </h2>
+         </>
+      );
 
-          </button>
+   }
 
-          <button onClick={() => setFilter("T-Shirts")}>
+   return (
 
-            T-Shirts
+      <>
 
-          </button>
+       
 
-          <button onClick={() => setFilter("Jeans")}>
+         <section className="women-page">
 
-            Jeans
+            <h1>
+               WOMEN'S COLLECTION
+            </h1>
 
-          </button>
+            <p className="women-subtitle">
+               Premium Fashion Collection For Women
+            </p>
 
-          <button onClick={() => setFilter("Formal Pants")}>
+            <div className="filter-bar">
 
-            Formal Pants
+               <button onClick={() => setFilter("All")}>
+                  All Products
+               </button>
 
-          </button>
+               <button onClick={() => setFilter("Blazers")}>
+                  Blazers
+               </button>
 
-          <button onClick={() => setFilter("Denim Jackets")}>
+               <button onClick={() => setFilter("Tops")}>
+                  Tops
+               </button>
 
-            Denim Jackets
+               <button onClick={() => setFilter("T-Shirts")}>
+                  T-Shirts
+               </button>
 
-          </button>
+               <button onClick={() => setFilter("Jeans")}>
+                  Jeans
+               </button>
 
-        </div>
+               <button onClick={() => setFilter("Formal Pants")}>
+                  Formal Pants
+               </button>
 
-        <div className="women-grid">
+               <button onClick={() => setFilter("Denim Jackets")}>
+                  Denim Jackets
+               </button>
 
-          {
+            </div>
 
-            filteredProducts.map((item) => (
+            <div className="women-grid">
 
-              <div
+               {
 
-                className="women-card"
+                  filteredProducts.map((item) => (
 
-                key={item.id}
+                     <div
+                        key={item._id}
+                        className="women-card"
+                     >
 
-              >
+                        <img
 
-                <img
+                           src={
+                              item.image.startsWith("http")
+                                 ? item.image
+                                 : `http://localhost:5000${item.image}`
+                           }
 
-                  src={item.image}
+                           alt={item.name}
 
-                  alt={item.name}
+                           onClick={() =>
+                              navigate(
+                                 `/product/${item._id}`
+                              )
+                           }
 
-                />
+                        />
 
-                <div className="women-info">
+                        <div className="women-info">
 
-                  <span className="category-tag">
+                           <span className="category-tag">
 
-                    {item.category}
+                              {item.category}
 
-                  </span>
+                           </span>
 
-                  <h3>
+                           <h3>
 
-                    {item.name}
+                              {item.name}
 
-                  </h3>
+                           </h3>
 
-                  <p>
+                           <p>
 
-                    {item.price}
+                              ₹{item.price}
 
-                  </p>
+                           </p>
 
-                  <div className="button-group">
+                           <div className="women-button-group">
 
-                    <button
+                              <button
 
-                      className="details-btn"
+                                 className="women-details-btn"
 
-                      onClick={() =>
+                                 onClick={() =>
+                                    navigate(
+                                       `/product/${item._id}`
+                                    )
+                                 }
 
-                        navigate(`/product/${item.id}`)
+                              >
 
-                      }
+                                 View Details
 
-                    >
+                              </button>
 
-                      View Details
+                              <button
 
-                    </button>
+                                 className="women-cart-btn"
 
-                    <button
+                                 onClick={() =>
+                                    handleCart(item)
+                                 }
 
-                      className="buy-btn"
+                              >
 
-                      onClick={() =>
+                                 Add To Cart
 
-                        handleCart(item)
+                              </button>
 
-                      }
+                              <button
 
-                    >
+                                 className="women-wishlist-btn"
 
-                      Add To Cart
+                                 onClick={() =>
+                                    handleWishlist(item)
+                                 }
 
-                    </button>
+                              >
 
-                    <button
+                                 ❤️
 
-                      className="details-btn"
+                              </button>
 
-                      onClick={() =>
+                           </div>
 
-                        handleWishlist(item)
+                        </div>
 
-                      }
+                     </div>
 
-                    >
+                  ))
 
-                      ❤️
+               }
 
-                    </button>
+            </div>
 
-                  </div>
+         </section>
 
-                </div>
+      </>
 
-              </div>
-
-            ))
-
-          }
-
-        </div>
-
-      </section>
-
-    </>
-
-  );
+   );
 
 }
 

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
+
+
 import "../styles/Hero.css";
 
 import CategorySection from "../components/CategorySection";
@@ -22,34 +24,37 @@ const slides = [
     title: "Modern Women's Wear",
     subtitle: "Fresh Styles Starting ₹999",
     button: "Shop Women",
+    path: "/women",
   },
-
   {
     image: menFormal,
     tag: "FORMAL COLLECTION",
     title: "Executive Elegance",
     subtitle: "Flat 15% OFF On Blazers",
     button: "Shop Formal",
+    path: "/men",
   },
-
   {
     image: casualBanner,
     tag: "CASUAL EDIT",
     title: "Everyday Comfort",
     subtitle: "Trending Fashion Essentials",
     button: "Explore Now",
+    path: "/men",
   },
-
   {
     image: festiveBanner,
     tag: "FESTIVE SPECIAL",
     title: "Celebrate In Style",
     subtitle: "Up To 40% OFF Ethnic Wear",
     button: "Shop Festive",
+    path: "/women",
   },
 ];
 
 function Home() {
+  const navigate = useNavigate();
+
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -72,18 +77,20 @@ function Home() {
 
   return (
     <>
-      <Navbar />
+
 
       <section className="hero">
+
         <img
           src={slides[current].image}
-          alt="banner"
+          alt={slides[current].title}
           className="hero-image"
         />
 
         <button
           className="arrow left-arrow"
           onClick={prevSlide}
+          aria-label="Previous Slide"
         >
           ❮
         </button>
@@ -91,54 +98,31 @@ function Home() {
         <button
           className="arrow right-arrow"
           onClick={nextSlide}
+          aria-label="Next Slide"
         >
           ❯
         </button>
 
         <div className="hero-content">
+
           <p>{slides[current].tag}</p>
 
           <h1>{slides[current].title}</h1>
 
           <h3>{slides[current].subtitle}</h3>
 
-           <button
-  onClick={() => {
+          <button
+            onClick={() => navigate(slides[current].path)}
+          >
+            {slides[current].button}
+          </button>
 
-    if (current === 0) {
-
-      window.location.href = "/women";
-
-    }
-
-    else if (current === 1) {
-
-      window.location.href = "/men";
-
-    }
-
-    else if (current === 2) {
-
-      window.location.href = "/men";
-
-    }
-
-    else {
-
-      window.location.href = "/women";
-
-    }
-
-  }}
->
-
-  {slides[current].button}
-
-</button>
         </div>
 
         <div className="hero-dots">
+
           {slides.map((_, index) => (
+
             <span
               key={index}
               className={
@@ -147,9 +131,12 @@ function Home() {
                   : "dot"
               }
               onClick={() => setCurrent(index)}
-            ></span>
+            />
+
           ))}
+
         </div>
+
       </section>
 
       <CategorySection />

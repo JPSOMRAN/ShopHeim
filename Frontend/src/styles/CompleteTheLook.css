@@ -1,0 +1,23 @@
+/* ==========================================
+   COMPLETE THE LOOK
+========================================== */
+
+@import "./PeopleAlsoLook.css";
+
+.people-look{
+
+    margin-top:90px;
+
+}
+
+.people-look h2{
+
+    color:#111;
+
+    font-size:2.4rem;
+
+    font-weight:800;
+
+    margin-bottom:32px;
+
+}

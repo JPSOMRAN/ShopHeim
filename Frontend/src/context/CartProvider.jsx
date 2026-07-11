@@ -1,10 +1,35 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import CartContext from "./CartContext";
 
 export function CartProvider({ children }) {
 
-  const [cartItems, setCartItems] = useState([]);
+  // =============================
+  // Load Cart From LocalStorage
+  // =============================
+
+  const [cartItems, setCartItems] = useState(() => {
+
+    const savedCart = localStorage.getItem("cartItems");
+
+    return savedCart ? JSON.parse(savedCart) : [];
+
+  });
+
+  // =============================
+  // Save Cart To LocalStorage
+  // =============================
+
+  useEffect(() => {
+
+    localStorage.setItem(
+
+      "cartItems",
+
+      JSON.stringify(cartItems)
+
+    );
+
+  }, [cartItems]);
 
   // =============================
   // Add To Cart
@@ -16,7 +41,8 @@ export function CartProvider({ children }) {
 
       (item) =>
 
-        item.id === product.id &&
+        item._id === product._id &&
+
         item.size === size
 
     );
@@ -27,12 +53,16 @@ export function CartProvider({ children }) {
 
         cartItems.map((item) =>
 
-          item.id === product.id &&
+          item._id === product._id &&
+
           item.size === size
 
             ? {
+
                 ...item,
+
                 quantity: item.quantity + 1,
+
               }
 
             : item
@@ -41,7 +71,9 @@ export function CartProvider({ children }) {
 
       );
 
-    } else {
+    }
+
+    else {
 
       setCartItems([
 
@@ -64,10 +96,10 @@ export function CartProvider({ children }) {
   };
 
   // =============================
-  // Remove
+  // Remove Item
   // =============================
 
-  const removeFromCart = (id, size) => {
+  const removeFromCart = (_id, size) => {
 
     setCartItems(
 
@@ -77,7 +109,8 @@ export function CartProvider({ children }) {
 
           !(
 
-            item.id === id &&
+            item._id === _id &&
+
             item.size === size
 
           )
@@ -89,16 +122,17 @@ export function CartProvider({ children }) {
   };
 
   // =============================
-  // Increase
+  // Increase Quantity
   // =============================
 
-  const increaseQuantity = (id, size) => {
+  const increaseQuantity = (_id, size) => {
 
     setCartItems(
 
       cartItems.map((item) =>
 
-        item.id === id &&
+        item._id === _id &&
+
         item.size === size
 
           ? {
@@ -118,30 +152,42 @@ export function CartProvider({ children }) {
   };
 
   // =============================
-  // Decrease
+  // Decrease Quantity
   // =============================
 
-  const decreaseQuantity = (id, size) => {
+  const decreaseQuantity = (_id, size) => {
 
     setCartItems(
 
-      cartItems.map((item) =>
+      cartItems.map((item) => {
 
-        item.id === id &&
-        item.size === size &&
-        item.quantity > 1
+        if (
 
-          ? {
+          item._id === _id &&
 
-              ...item,
+          item.size === size
 
-              quantity: item.quantity - 1,
+        ) {
 
-            }
+          if (item.quantity === 1) {
 
-          : item
+            return null;
 
-      )
+          }
+
+          return {
+
+            ...item,
+
+            quantity: item.quantity - 1,
+
+          };
+
+        }
+
+        return item;
+
+      }).filter(Boolean)
 
     );
 
@@ -154,6 +200,8 @@ export function CartProvider({ children }) {
   const clearCart = () => {
 
     setCartItems([]);
+
+    localStorage.removeItem("cartItems");
 
   };
 

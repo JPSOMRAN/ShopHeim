@@ -10,7 +10,7 @@ export function WishlistProvider({ children }) {
 
     const exists = wishlistItems.find(
 
-      (item) => item.id === product.id
+      (item) => item._id === product._id
 
     );
 
@@ -32,7 +32,7 @@ export function WishlistProvider({ children }) {
 
       wishlistItems.filter(
 
-        (item) => item.id !== id
+        (item) => item._id !== id
 
       )
 

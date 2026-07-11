@@ -1,0 +1,373 @@
+/* ==========================================
+   TRENDING PRODUCTS
+========================================== */
+
+.people-section{
+    width:95%;
+    max-width:1550px;
+    margin:70px auto;
+}
+
+.people-section h2{
+    text-align:center;
+    font-size:clamp(1.8rem,4vw,3rem);
+    font-weight:900;
+    margin-bottom:40px;
+    color:#111;
+    letter-spacing:2px;
+}
+
+/* ==========================================
+   GRID
+========================================== */
+
+.people-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:18px;
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.people-card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    position:relative;
+    box-shadow:0 8px 22px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.people-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
+
+.people-card img{
+    width:100%;
+    aspect-ratio:4/5;
+    object-fit:cover;
+    display:block;
+}
+
+/* ==========================================
+   HEART
+========================================== */
+
+.people-heart{
+    position:absolute;
+    top:10px;
+    right:10px;
+
+    width:36px;
+    height:36px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#fff;
+    color:#ff4b6e;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+/* ==========================================
+   CONTENT
+========================================== */
+
+.people-content{
+    padding:12px;
+}
+
+.people-content span{
+    color:#888;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+
+.people-content h3{
+    margin:8px 0;
+    font-size:.9rem;
+    line-height:1.3;
+    color:#111;
+}
+
+.people-content p{
+    font-size:.8rem;
+    color:#666;
+}
+
+.people-rating{
+    margin-top:8px;
+    color:#0f9d58;
+    font-size:.8rem;
+    font-weight:700;
+}
+
+.people-price{
+    margin:10px 0;
+    font-size:1.25rem;
+    font-weight:800;
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.people-buttons{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:6px;
+}
+
+.people-buttons button{
+    height:36px;
+    border-radius:8px;
+    font-size:.7rem;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.people-buttons button:first-child{
+    background:#fff;
+    border:2px solid #111;
+}
+
+.people-buttons button:last-child{
+    background:#111;
+    color:#fff;
+    border:none;
+}
+
+/* ==========================================
+   DESKTOP
+========================================== */
+
+@media(max-width:1400px){
+
+.people-grid{
+    grid-template-columns:repeat(6,1fr);
+    gap:16px;
+}
+
+}
+
+/* ==========================================
+   LAPTOP
+========================================== */
+
+@media(max-width:1200px){
+
+.people-grid{
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.people-content{
+    padding:10px;
+}
+
+.people-content h3{
+    font-size:.8rem;
+}
+
+.people-content p{
+    font-size:.7rem;
+}
+
+.people-rating{
+    font-size:.7rem;
+}
+
+.people-price{
+    font-size:1rem;
+}
+
+.people-buttons button{
+    height:30px;
+    font-size:.6rem;
+}
+
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media(max-width:992px){
+
+.people-section{
+    margin:60px auto;
+}
+
+.people-section h2{
+    font-size:2rem;
+}
+
+.people-grid{
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+.people-heart{
+    width:28px;
+    height:28px;
+    font-size:10px;
+}
+
+.people-content{
+    padding:8px;
+}
+
+.people-content span{
+    font-size:8px;
+}
+
+.people-content h3{
+    font-size:.68rem;
+}
+
+.people-content p{
+    font-size:.58rem;
+}
+
+.people-rating{
+    font-size:.58rem;
+}
+
+.people-price{
+    font-size:.85rem;
+}
+
+.people-buttons button{
+    height:26px;
+    font-size:.5rem;
+}
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:768px){
+
+.people-section{
+    width:95%;
+}
+
+.people-section h2{
+    font-size:1.7rem;
+}
+
+.people-grid{
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.people-card{
+    border-radius:12px;
+}
+
+.people-heart{
+    width:24px;
+    height:24px;
+    font-size:9px;
+}
+
+.people-content{
+    padding:7px;
+}
+
+.people-content span{
+    font-size:7px;
+}
+
+.people-content h3{
+    font-size:.62rem;
+    line-height:1.2;
+}
+
+.people-content p{
+    font-size:.55rem;
+}
+
+.people-rating{
+    font-size:.55rem;
+}
+
+.people-price{
+    font-size:.8rem;
+    margin:6px 0;
+}
+
+.people-buttons button{
+    height:24px;
+    font-size:.48rem;
+}
+
+}
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media(max-width:480px){
+
+.people-section h2{
+    font-size:1.4rem;
+    margin-bottom:22px;
+}
+
+.people-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+}
+
+.people-card{
+    border-radius:10px;
+}
+
+.people-heart{
+    width:22px;
+    height:22px;
+    font-size:8px;
+}
+
+.people-content{
+    padding:6px;
+}
+
+.people-content span{
+    font-size:6px;
+}
+
+.people-content h3{
+    font-size:.56rem;
+}
+
+.people-content p{
+    font-size:.5rem;
+}
+
+.people-rating{
+    font-size:.5rem;
+}
+
+.people-price{
+    font-size:.72rem;
+}
+
+.people-buttons button{
+    height:22px;
+    font-size:.45rem;
+}
+
+}

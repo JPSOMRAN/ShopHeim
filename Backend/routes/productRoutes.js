@@ -1,4 +1,6 @@
 import express from "express";
+import protect from "../middleware/authMiddleware.js";
+import admin from "../middleware/adminMiddleware.js";
 
 import {
 
@@ -16,18 +18,15 @@ import {
 
 const router = express.Router();
 
-router.route("/")
-
+router
+  .route("/")
   .get(getProducts)
+  .post(protect, admin, createProduct);
 
-  .post(createProduct);
-
-router.route("/:id")
-
+router
+  .route("/:id")
   .get(getProductById)
-
-  .put(updateProduct)
-
-  .delete(deleteProduct);
+  .put(protect, admin, updateProduct)
+  .delete(protect, admin, deleteProduct);
 
 export default router;

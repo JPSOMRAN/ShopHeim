@@ -1,63 +1,364 @@
-.related-products{
-  width:90%;
-  margin:80px auto;
-}
+/* ==================================================
+   RELATED PRODUCTS
+================================================== */
 
-.related-products h2{
-  color:white;
-  margin-bottom:30px;
-  font-size:2rem;
+.related-products{
+    width:100%;
+    max-width:1850px;
+    margin:50px auto;
+    padding:0 20px;
 }
+.related-products h2{
+    color:#111;
+    font-size:2rem;
+    font-weight:800;
+    margin-bottom:25px;
+}
+/* ==================================================
+   GRID
+================================================== */
 
 .related-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:25px;
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:16px;
 }
+/* ==================================================
+   CARD
+================================================== */
 
 .related-card{
-  background:white;
-  border-radius:20px;
-  overflow:hidden;
-  text-align:center;
-  padding-bottom:20px;
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    background:#fff;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
 }
+
+.related-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+/* ==================================================
+   IMAGE
+================================================== */
 
 .related-card img{
-  width:100%;
-  height:300px;
-  object-fit:cover;
+
+    width:100%;
+
+    height:320px;
+
+    object-fit:cover;
+
+    cursor:pointer;
+
+    transition:.35s;
+
 }
 
-.related-card h3{
-  padding:15px;
-  color:black;
-  font-size:1rem;
+.related-card:hover img{
+
+    transform:scale(1.05);
+
 }
 
-.related-card p{
-  color:#d4af37;
-  font-weight:700;
-  margin-bottom:15px;
+/* ==================================================
+   WISHLIST
+================================================== */
+
+.related-wishlist{
+
+    position:absolute;
+
+    top:16px;
+
+    right:16px;
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    color:#ff4b6e;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    z-index:5;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+    transition:.3s;
+
 }
 
-.related-card button{
-  border:none;
-  background:#d4af37;
-  color:white;
-  padding:12px 20px;
-  border-radius:10px;
-  cursor:pointer;
+.related-wishlist:hover{
+
+    background:#ff4b6e;
+
+    color:white;
+
 }
 
-.related-card button:hover{
-  background:#b89427;
+/* ==================================================
+   CONTENT
+================================================== */
+
+.related-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+    padding:14px;
+
 }
 
-@media(max-width:900px){
+/* ==================================================
+   CATEGORY
+================================================== */
 
-  .related-grid{
+.related-category{
+
+    color:#888;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    margin-bottom:8px;
+
+}
+
+/* ==================================================
+   TITLE
+================================================== */
+
+.related-content h3{
+
+    margin:0;
+
+    color:#111;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    line-height:1.3;
+
+    min-height:40px;
+
+}
+
+/* ==================================================
+   BRAND
+================================================== */
+
+.related-brand{
+
+    margin-top:10px;
+
+    color:#666;
+
+    font-size:15px;
+
+}
+
+/* ==================================================
+   RATING
+================================================== */
+
+.related-rating{
+
+    margin-top:14px;
+
+    color:#118a3d;
+
+    font-weight:700;
+
+    font: size 1.45rem;;
+
+}
+
+/* ==================================================
+   PRICE
+================================================== */
+
+.related-price{
+
+    margin:12px 0 16px;
+
+    color:#111;
+
+    font-size:1.7rem;
+
+    font-weight:800;
+
+}
+
+/* ==================================================
+   BUTTONS
+================================================== */
+.related-buttons{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:6px;
+    margin-top:auto;
+}
+/* ==================================================
+   COMMON BUTTON
+================================================== */
+
+.related-details-btn,
+.related-cart-btn{
+
+    width:100%;
+    height:36px;
+
+    border-radius:8px;
+
+    font-size:.7rem;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+/* ==================================================
+   DETAILS
+================================================== */
+.related-details-btn{
+
+    background:#fff;
+    color:#111;
+
+    border:2px solid #111;
+}
+
+.related-details-btn:hover{
+
+    background:#111;
+    color:#fff;
+}
+
+/* ==================================================
+   CART
+================================================== */
+.related-cart-btn{
+
+    background:#111;
+    color:#fff;
+
+    border:none;
+}
+
+.related-cart-btn:hover{
+
+    background:#333;
+}
+
+/* ==================================================
+   EMPTY
+================================================== */
+
+.no-related{
+
+    width:100%;
+
+    padding:80px;
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:1.2rem;
+
+}
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media(max-width:1600px){
+
+.related-grid{
+
+grid-template-columns:repeat(6,1fr);
+
+}
+
+}
+
+@media(max-width:1200px){
+
+.related-grid{
+
+grid-template-columns:repeat(4,1fr);
+
+}
+
+}
+
+@media(max-width:992px){
+
+.related-grid{
+
+grid-template-columns:repeat(4,1fr);
+
+}
+
+}
+@media(max-width:768px){
+
+.related-grid{
+    grid-template-columns:repeat(3,1fr);
+}
+
+.related-buttons{
+    display:grid;
     grid-template-columns:1fr 1fr;
-  }
+    gap:8px;
+}
+
+.related-details-btn,
+.related-cart-btn{
+    width:100%;
+}
 
 }

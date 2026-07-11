@@ -34,6 +34,42 @@ const userSchema = new mongoose.Schema(
 
     },
 
+    phone: {
+
+      type: String,
+
+      default: "",
+
+    },
+
+    address: {
+
+      type: String,
+
+      default: "",
+
+    },
+
+    avatar: {
+
+      type: String,
+
+      default: "",
+
+    },
+
+    // ==========================
+    // Admin Role
+    // ==========================
+
+    isAdmin: {
+
+      type: Boolean,
+
+      default: false,
+
+    },
+
   },
 
   {
