@@ -851,7 +851,7 @@ const products = [
     category: "Footwear",
     gender: "Men",
     image: "/products/men/hankle2.jpg",
-    images: ["/products/men/hankle2.jpg"],
+    images: ["/products/men/hankle2.jpg","/products/men/hankle2i.jpg","/products/men/hankle2ii.jpg","/products/men/hankle2iii.jpg"],
     price: 5499,
     rating: 4.9,
     description: "Adventure series boot.",

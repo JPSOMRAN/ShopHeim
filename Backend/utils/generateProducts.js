@@ -178,7 +178,7 @@ const multiImageProducts = [
 
   "grooming4",
 
-  "Hankle2",
+  "hankle2",
 
   "jeans2",
 
