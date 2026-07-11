@@ -8,7 +8,7 @@ import "../styles/ManageOrders.css";
 
 function ManageOrders() {
 
-  const API = "http://localhost:5000";
+  const API = "https://shopheim.onrender.com";
 
   const [orders, setOrders] = useState([]);
 

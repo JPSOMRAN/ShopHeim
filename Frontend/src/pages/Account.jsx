@@ -14,7 +14,7 @@ function Account() {
   // Backend URL
   // ==========================
 
-  const API = "http://localhost:5000";
+  const API = "https://shopheim.onrender.com";
 
   // ==========================
   // States

@@ -8,7 +8,7 @@ import "../styles/ManageProducts.css";
 
 function ManageProducts() {
 
-  const API = "http://localhost:5000";
+  const API = "https://shopheim.onrender.com";
 
   // ==========================
   // States
@@ -662,7 +662,7 @@ function ManageProducts() {
 
                         ? formData.image
 
-                        : `http://localhost:5000${formData.image}`
+                        : `https://shopheim.onrender.com${formData.image}`
 
                     }
 

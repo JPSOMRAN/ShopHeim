@@ -279,7 +279,7 @@ function Products() {
               <div key={product._id} className="product-card">
                 <div className="product-image">
                   <img
-                    src={product.image.startsWith("http") ? product.image : `http://localhost:5000${product.image}`}
+                    src={product.image.startsWith("http") ? product.image : `https://shopheim.onrender.com${product.image}`}
                     alt={product.name}
                     onClick={() => navigate(`/product/${product._id}`)}
                   />

@@ -33,7 +33,7 @@ function PeopleAlsoLook({ currentProduct }) {
       try {
 
         const { data } = await axios.get(
-          `http://localhost:5000/api/products?gender=${currentProduct.gender}`
+          `https://shopheim.onrender.com/api/products?gender=${currentProduct.gender}`
         );
 
         const categories =
@@ -138,7 +138,7 @@ function PeopleAlsoLook({ currentProduct }) {
                 src={
                   product.image.startsWith("http")
                     ? product.image
-                    : `http://localhost:5000${product.image}`
+                    : `https://shopheim.onrender.com${product.image}`
                 }
 
                 alt={product.name}

@@ -182,7 +182,7 @@ const handleWishlist = (item) => {
 
   const image = item.image?.startsWith("http")
     ? item.image
-    : `http://localhost:5000${item.image}`;
+    : `https://shopheim.onrender.com${item.image}`;
 
   const oldPrice = Math.round(item.price * 1.7);
 

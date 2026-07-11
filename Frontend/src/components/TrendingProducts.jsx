@@ -31,7 +31,7 @@ function TrendingProducts({ currentProduct }) {
       try {
 
         const { data } = await axios.get(
-          `http://localhost:5000/api/products?gender=${currentProduct.gender}`
+          `https://shopheim.onrender.com/api/products?gender=${currentProduct.gender}`
         );
 
         const filtered = data
@@ -111,7 +111,7 @@ function TrendingProducts({ currentProduct }) {
               src={
                 item.image.startsWith("http")
                   ? item.image
-                  : `http://localhost:5000${item.image}`
+                  : `https://shopheim.onrender.com${item.image}`
               }
               alt={item.name}
               onClick={() => navigate(`/product/${item._id}`)}

@@ -286,7 +286,7 @@ function ProductDetails() {
     src={
       selectedImage.startsWith("http")
         ? selectedImage
-        : `http://localhost:5000${selectedImage}`
+        : `https://shopheim.onrender.com${selectedImage}`
     }
             alt={product.name}
 
@@ -306,7 +306,7 @@ function ProductDetails() {
 
                     ? selectedImage
 
-                    : `http://localhost:5000${selectedImage}`
+                    : `https://shopheim.onrender.com${selectedImage}`
 
                 })`,
 
@@ -342,7 +342,7 @@ function ProductDetails() {
 
                     ? img
 
-                    : `http://localhost:5000${img}`
+                    : `https://shopheim.onrender.com${img}`
 
                 }
 

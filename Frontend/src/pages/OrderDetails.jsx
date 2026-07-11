@@ -12,7 +12,7 @@ function OrderDetails() {
 
   const navigate = useNavigate();
 
-  const API = "http://localhost:5000";
+  const API = "https://shopheim.onrender.com";
 
   const [order, setOrder] = useState(null);
 
@@ -213,7 +213,7 @@ function OrderDetails() {
 
                   <img
 
-                    src={`http://localhost:5000${item.image}`}
+                    src={`$https://shopheim.onrender.com{item.image}`}
 
                     alt={item.name}
 

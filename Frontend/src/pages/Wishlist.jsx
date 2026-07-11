@@ -133,7 +133,7 @@ function Wishlist() {
 
                 ? item.image
 
-                : `http://localhost:5000${item.image}`;
+                : `https://shopheim.onrender.com${item.image}`;
 
             return (
 

@@ -8,7 +8,7 @@ import "../styles/ManageUsers.css";
 
 function ManageUsers() {
 
-  const API = "http://localhost:5000";
+  const API = "https://shopheim.onrender.com";
 
   const [users, setUsers] = useState([]);
 

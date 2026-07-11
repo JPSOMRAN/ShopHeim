@@ -197,7 +197,7 @@ function Women() {
                            src={
                               item.image.startsWith("http")
                                  ? item.image
-                                 : `http://localhost:5000${item.image}`
+                                 : `https://shopheim.onrender.com${item.image}`
                            }
 
                            alt={item.name}

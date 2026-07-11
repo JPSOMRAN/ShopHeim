@@ -428,7 +428,7 @@ function Search() {
 
                       ? product.image
 
-                      : `http://localhost:5000${product.image}`
+                      : `https://shopheim.onrender.com${product.image}`
                   }
                   alt={product.name}
                   onClick={() =>
